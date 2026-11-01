@@ -1,0 +1,6 @@
+﻿Solucao_Final/node_modules/
+Solucao_Final/package-lock.json
+*.tmp
+~$*
+Thumbs.db
+.DS_Store

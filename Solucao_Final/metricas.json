@@ -1,0 +1,321 @@
+{
+  "geradoEm": "2026-11-01T16:10:11.556Z",
+  "fonte": "Todos os atendimentos - Análise 26-10-2026 21-34-15.xlsx",
+  "n": 614,
+  "nOpen": 27,
+  "pctOpen": 0.044,
+  "nLabeled": 370,
+  "labeledPct": 0.603,
+  "byStatus": [
+    [
+      "Resolvida",
+      587
+    ],
+    [
+      "Ativa",
+      27
+    ]
+  ],
+  "byRazaoOpen": [
+    [
+      "Novo",
+      12
+    ],
+    [
+      "Aguardando Resposta do Cliente",
+      6
+    ],
+    [
+      "Aguardando Resposta do Fornecedor",
+      5
+    ],
+    [
+      "Em Análise",
+      2
+    ],
+    [
+      "Aguardando Aprovação",
+      2
+    ]
+  ],
+  "byCluster": [
+    [
+      "Plataforma comercial",
+      124
+    ],
+    [
+      "Integracao",
+      100
+    ],
+    [
+      "Fila",
+      89
+    ],
+    [
+      "Arvore",
+      74
+    ],
+    [
+      "Direito de acesso",
+      56
+    ],
+    [
+      "Gestao de contratos",
+      38
+    ],
+    [
+      "Outros / a classificar",
+      22
+    ],
+    [
+      "Incidente / bug",
+      20
+    ],
+    [
+      "Cadastro e dados",
+      15
+    ],
+    [
+      "Duvida",
+      15
+    ],
+    [
+      "Relatorio / Power BI",
+      13
+    ],
+    [
+      "Melhoria / parametrizacao",
+      11
+    ],
+    [
+      "Unifácil",
+      6
+    ],
+    [
+      "Erro ",
+      6
+    ],
+    [
+      "E-mail e automacao",
+      5
+    ],
+    [
+      "Envio de pesquisas",
+      4
+    ],
+    [
+      "DS",
+      2
+    ],
+    [
+      "Declaração de Saúde",
+      2
+    ],
+    [
+      "Erro/Bug",
+      2
+    ],
+    [
+      "Inclusão de Recurso",
+      2
+    ],
+    [
+      "Sharepoint",
+      1
+    ],
+    [
+      "Plugin",
+      1
+    ],
+    [
+      "Bug",
+      1
+    ],
+    [
+      "Roteamento",
+      1
+    ],
+    [
+      "API",
+      1
+    ],
+    [
+      "SLA",
+      1
+    ],
+    [
+      "Field Service",
+      1
+    ],
+    [
+      "Customer Voice",
+      1
+    ]
+  ],
+  "byFamilia": [
+    [
+      "N2 direto",
+      253
+    ],
+    [
+      "Dependente de N3 / integracao",
+      224
+    ],
+    [
+      "Perfil N1 / Inteligencia",
+      84
+    ],
+    [
+      "Misto (comercial / dados)",
+      53
+    ]
+  ],
+  "byNivel": [
+    [
+      "N2",
+      253
+    ],
+    [
+      "N3",
+      224
+    ],
+    [
+      "N1",
+      84
+    ],
+    [
+      "Misto",
+      53
+    ]
+  ],
+  "byPrio": [
+    [
+      "Normal",
+      307
+    ],
+    [
+      "Baixa",
+      175
+    ],
+    [
+      "Alta",
+      132
+    ]
+  ],
+  "byMonth": {
+    "2026-10": {
+      "criados": 48,
+      "encerrados": 69
+    },
+    "2026-09": {
+      "criados": 63,
+      "encerrados": 64
+    },
+    "2026-07": {
+      "criados": 70,
+      "encerrados": 71
+    },
+    "2026-08": {
+      "criados": 72,
+      "encerrados": 128
+    },
+    "2026-06": {
+      "criados": 72,
+      "encerrados": 53
+    },
+    "2026-02": {
+      "criados": 44,
+      "encerrados": 35
+    },
+    "2026-05": {
+      "criados": 61,
+      "encerrados": 62
+    },
+    "2026-03": {
+      "criados": 64,
+      "encerrados": 39
+    },
+    "2026-04": {
+      "criados": 51,
+      "encerrados": 51
+    },
+    "2026-01": {
+      "criados": 53,
+      "encerrados": 15
+    },
+    "2025-12": {
+      "criados": 14,
+      "encerrados": 1
+    },
+    "2025-10": {
+      "criados": 1,
+      "encerrados": 0
+    },
+    "2025-11": {
+      "criados": 1,
+      "encerrados": 0
+    }
+  },
+  "medCicloN2": 18.30902777777778,
+  "sla16": 0.8881987577639752,
+  "medianHoursResolved": 4,
+  "riskCutDays": 10,
+  "modeloNivel": {
+    "algoritmo": "Naive Bayes multinomial (titulo + categoria + prioridade)",
+    "treino": 259,
+    "teste": 111,
+    "acuracia": 0.784,
+    "f1PorClasse": [
+      {
+        "c": "N1",
+        "p": 0.75,
+        "r": 0.21428571428571427,
+        "f1": 0.3333333333333333
+      },
+      {
+        "c": "N2",
+        "p": 0.7307692307692307,
+        "r": 0.95,
+        "f1": 0.8260869565217392
+      },
+      {
+        "c": "N3",
+        "p": 0.8518518518518519,
+        "r": 0.9019607843137255,
+        "f1": 0.8761904761904761
+      },
+      {
+        "c": "Misto",
+        "p": 0,
+        "r": 0,
+        "f1": 0
+      }
+    ]
+  },
+  "modeloRisco": {
+    "algoritmo": "Regressao logistica (prioridade, nivel, palavras-chave, razao)",
+    "nResolvidos": 587,
+    "corteDias": 10,
+    "holdoutAcuracia": 0.729,
+    "precisaoAlto": 0.723,
+    "recallAlto": 0.919,
+    "f1Alto": 0.81,
+    "pesos": {
+      "pAlta": 0.6235253362183174,
+      "pBaixa": 0.8396656154335751,
+      "n3": 0.2855893523565963,
+      "n1": -0.49666844141798083,
+      "misto": 0.09984043757276737,
+      "kwInt": 0.19969627243790522,
+      "kwAcesso": -0.563103734614359,
+      "kwFila": -0.019123771826211562,
+      "aguard": 0,
+      "intercepto": 0.13817918054596134
+    }
+  },
+  "impactoSimulado": {
+    "abertosPerfilN1Sugerido": 2,
+    "abertosPerfilN3Sugerido": 9,
+    "abertosRiscoAlto": 23
+  }
+}
