@@ -535,7 +535,7 @@ const html = `<!DOCTYPE html>
 <body>
 <header>
   <h1>Predição e classificação operacional de chamados N2</h1>
-  <p>Unimed POA / sustentação Dynamics — solução final PI IV · base ${esc(src)} · ${n} chamados</p>
+  <p>Instituição analisada / sustentação Dynamics — solução final PI IV · base ${esc(src)} · ${n} chamados</p>
 </header>
 <div class="wrap">
   <div class="kpis">

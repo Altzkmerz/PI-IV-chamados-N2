@@ -137,7 +137,7 @@ const html = `<!DOCTYPE html>
   <b>Power BI</b>
   <span>Relatorio de Chamados.pbix</span>
   <span>·</span>
-  <span>Unimed POA / N2 Dynamics</span>
+  <span>Instituição analisada / N2 Dynamics</span>
   <span style="margin-left:auto">Filtros do relatório · Base 26/10/2026 · ${n} chamados</span>
 </div>
 <div class="tabs">

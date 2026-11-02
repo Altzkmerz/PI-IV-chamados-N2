@@ -1,6 +1,6 @@
 GUIA CAMPO A CAMPO — Relatório Power BI
 Fonte: Solucao_Final\Chamados_N2_com_predicao.xlsx
-Tema de cores (Unimed L3): #00ADEF  #00995D  #FEBE00  #005C40  #CC3366  #263339
+Tema de cores (instituição analisada): #00ADEF  #00995D  #FEBE00  #005C40  #CC3366  #263339
 Tamanho da página: 16:9 (1920 x 1080) · Ajustar à página
 
 
