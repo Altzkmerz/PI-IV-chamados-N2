@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Relatório Power BI — Chamados N2</title>
+<style>
+  :root {
+    --az:#00ADEF; --vd:#00995D; --vd2:#005C40; --am:#FEBE00;
+    --tx:#263339; --bg:#F4F7F6; --card:#fff; --bad:#CC3366;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; font-family:"Segoe UI",Arial,sans-serif; background:var(--bg); color:var(--tx); }
+  .pbi-top {
+    height:40px; background:#F3F2F1; border-bottom:1px solid #E1DFDD;
+    display:flex; align-items:center; gap:16px; padding:0 16px; font-size:12px; color:#605E5C;
+  }
+  .pbi-top b { color:var(--vd2); font-size:13px; }
+  .tabs { display:flex; gap:0; background:#fff; border-bottom:1px solid #E1DFDD; padding:0 16px; }
+  .tab { padding:10px 18px; cursor:pointer; font-size:13px; border-bottom:3px solid transparent; color:#605E5C; }
+  .tab.on { color:var(--vd2); border-bottom-color:var(--vd); font-weight:600; }
+  .page { display:none; padding:14px 18px 18px; }
+  .page.on { display:block; }
+  .kpis { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:12px; }
+  .kpi { background:#fff; border-radius:4px; padding:10px 12px; box-shadow:0 1px 3px #0001; border-top:3px solid var(--vd); }
+  .kpi.alt { border-top-color:var(--az); }
+  .kpi.warn { border-top-color:var(--bad); }
+  .kpi span { font-size:11px; color:#605E5C; }
+  .kpi b { display:block; font-size:26px; line-height:1.15; color:var(--vd2); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .grid3 { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:10px; }
+  .card { background:#fff; border-radius:4px; padding:12px 14px; box-shadow:0 1px 3px #0001; min-height:220px; }
+  .card h3 { margin:0 0 10px; font-size:12px; color:var(--vd2); font-weight:600; }
+  .barrow { display:grid; grid-template-columns:150px 1fr 36px; gap:8px; align-items:center; margin:5px 0; font-size:12px; }
+  .blab { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .btrack { background:#E6EEE9; height:8px; border-radius:6px; }
+  .bfill { height:8px; border-radius:6px; }
+  .bn { text-align:right; color:#605E5C; }
+  table { width:100%; border-collapse:collapse; font-size:11px; }
+  th { text-align:left; color:#605E5C; font-weight:600; padding:5px 6px; border-bottom:1px solid #E1DFDD; }
+  td { padding:5px 6px; border-bottom:1px solid #F3F2F1; }
+  .alto { color:var(--bad); font-weight:600; }
+  .baixo { color:var(--vd); }
+  .pill { display:inline-block; background:#E6F4EC; color:var(--vd2); border-radius:99px; padding:1px 8px; font-size:10px; }
+  .filters { display:flex; gap:8px; margin-bottom:12px; font-size:12px; color:#605E5C; }
+  .chip { background:#fff; border:1px solid #E1DFDD; border-radius:12px; padding:4px 10px; }
+  footer.note { margin-top:10px; font-size:11px; color:#605E5C; }
+</style>
+</head>
+<body>
+<div class="pbi-top">
+  <b>Power BI</b>
+  <span>Relatorio de Chamados.pbix</span>
+  <span>·</span>
+  <span>Unimed POA / N2 Dynamics</span>
+  <span style="margin-left:auto">Filtros do relatório · Base 26/10/2026 · 614 chamados</span>
+</div>
+<div class="tabs">
+  <div class="tab on" data-p="op">Visão Operacional</div>
+  <div class="tab" data-p="pred">Predição e classificação</div>
+</div>
+
+<section id="op" class="page on">
+  <div class="filters">
+    <span class="chip">Status: todos</span>
+    <span class="chip">Ano: 2026</span>
+    <span class="chip">Origem: Qualitor + score ML</span>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span>Total de chamados</span><b>614</b></div>
+    <div class="kpi alt"><span>Ainda abertos</span><b>27</b></div>
+    <div class="kpi"><span>% abertos</span><b>4.4%</b></div>
+    <div class="kpi alt"><span>Encerrados</span><b>587</b></div>
+    <div class="kpi warn"><span>Abertos com risco alto</span><b>23</b></div>
+  </div>
+  <div class="grid3">
+    <div class="card" style="grid-column:1/-1">
+      <h3>Criados × encerrados (2026)</h3>
+      <svg viewBox="0 0 860 210" width="100%" height="210"><rect x="36" y="119.75" width="32.833333333333336" height="66.25" fill="#00ADEF"/><rect x="71.83333333333334" y="167.25" width="32.833333333333336" height="18.75" fill="#00995D"/><text x="68.83333333333334" y="202" font-size="10" fill="#263339" text-anchor="middle">01</text><rect x="114.8" y="131" width="32.833333333333336" height="55" fill="#00ADEF"/><rect x="150.63333333333333" y="142.25" width="32.833333333333336" height="43.75" fill="#00995D"/><text x="147.63333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">02</text><rect x="193.6" y="106" width="32.833333333333336" height="80" fill="#00ADEF"/><rect x="229.43333333333334" y="137.25" width="32.833333333333336" height="48.75" fill="#00995D"/><text x="226.43333333333334" y="202" font-size="10" fill="#263339" text-anchor="middle">03</text><rect x="272.4" y="122.25" width="32.833333333333336" height="63.75" fill="#00ADEF"/><rect x="308.2333333333333" y="122.25" width="32.833333333333336" height="63.75" fill="#00995D"/><text x="305.2333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">04</text><rect x="351.2" y="109.75" width="32.833333333333336" height="76.25" fill="#00ADEF"/><rect x="387.0333333333333" y="108.5" width="32.833333333333336" height="77.5" fill="#00995D"/><text x="384.0333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">05</text><rect x="430" y="96" width="32.833333333333336" height="90" fill="#00ADEF"/><rect x="465.8333333333333" y="119.75" width="32.833333333333336" height="66.25" fill="#00995D"/><text x="462.8333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">06</text><rect x="508.79999999999995" y="98.5" width="32.833333333333336" height="87.5" fill="#00ADEF"/><rect x="544.6333333333333" y="97.25" width="32.833333333333336" height="88.75" fill="#00995D"/><text x="541.6333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">07</text><rect x="587.6" y="96" width="32.833333333333336" height="90" fill="#00ADEF"/><rect x="623.4333333333334" y="26" width="32.833333333333336" height="160" fill="#00995D"/><text x="620.4333333333334" y="202" font-size="10" fill="#263339" text-anchor="middle">08</text><rect x="666.4" y="107.25" width="32.833333333333336" height="78.75" fill="#00ADEF"/><rect x="702.2333333333333" y="106" width="32.833333333333336" height="80" fill="#00995D"/><text x="699.2333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">09</text><rect x="745.1999999999999" y="126" width="32.833333333333336" height="60" fill="#00ADEF"/><rect x="781.0333333333333" y="99.75" width="32.833333333333336" height="86.25" fill="#00995D"/><text x="778.0333333333333" y="202" font-size="10" fill="#263339" text-anchor="middle">10</text>
+    <text x="36" y="14" font-size="11" fill="#5b6777">2026 · azul = criados · verde = encerrados</text></svg>
+    </div>
+    <div class="card"><h3>Família operacional</h3><div class="barrow"><span class="blab" title="N2 direto">N2 direto</span><div class="btrack"><div class="bfill" style="width:100%;background:#00995D"></div></div><span class="bn">253</span></div><div class="barrow"><span class="blab" title="Dependente de N3 / integracao">Dependente de N3 / integracao</span><div class="btrack"><div class="bfill" style="width:89%;background:#00995D"></div></div><span class="bn">224</span></div><div class="barrow"><span class="blab" title="Perfil N1 / Inteligencia">Perfil N1 / Inteligencia</span><div class="btrack"><div class="bfill" style="width:33%;background:#00995D"></div></div><span class="bn">84</span></div><div class="barrow"><span class="blab" title="Misto (comercial / dados)">Misto (comercial / dados)</span><div class="btrack"><div class="bfill" style="width:21%;background:#00995D"></div></div><span class="bn">53</span></div></div>
+    <div class="card"><h3>Cluster do backlog</h3><div class="barrow"><span class="blab" title="Plataforma comercial">Plataforma comercial</span><div class="btrack"><div class="bfill" style="width:100%;background:#00ADEF"></div></div><span class="bn">124</span></div><div class="barrow"><span class="blab" title="Integracao">Integracao</span><div class="btrack"><div class="bfill" style="width:81%;background:#00ADEF"></div></div><span class="bn">100</span></div><div class="barrow"><span class="blab" title="Fila">Fila</span><div class="btrack"><div class="bfill" style="width:72%;background:#00ADEF"></div></div><span class="bn">89</span></div><div class="barrow"><span class="blab" title="Arvore">Arvore</span><div class="btrack"><div class="bfill" style="width:60%;background:#00ADEF"></div></div><span class="bn">74</span></div><div class="barrow"><span class="blab" title="Direito de acesso">Direito de acesso</span><div class="btrack"><div class="bfill" style="width:45%;background:#00ADEF"></div></div><span class="bn">56</span></div><div class="barrow"><span class="blab" title="Gestao de contratos">Gestao de contratos</span><div class="btrack"><div class="bfill" style="width:31%;background:#00ADEF"></div></div><span class="bn">38</span></div><div class="barrow"><span class="blab" title="Outros / a classificar">Outros / a classificar</span><div class="btrack"><div class="bfill" style="width:18%;background:#00ADEF"></div></div><span class="bn">22</span></div><div class="barrow"><span class="blab" title="Incidente / bug">Incidente / bug</span><div class="btrack"><div class="bfill" style="width:16%;background:#00ADEF"></div></div><span class="bn">20</span></div></div>
+    <div class="card"><h3>Abertos por razão de status</h3><div class="barrow"><span class="blab" title="Novo">Novo</span><div class="btrack"><div class="bfill" style="width:100%;background:#FEBE00"></div></div><span class="bn">12</span></div><div class="barrow"><span class="blab" title="Aguardando Resposta do Cliente">Aguardando Resposta do Cliente</span><div class="btrack"><div class="bfill" style="width:50%;background:#FEBE00"></div></div><span class="bn">6</span></div><div class="barrow"><span class="blab" title="Aguardando Resposta do Fornecedor">Aguardando Resposta do Fornecedor</span><div class="btrack"><div class="bfill" style="width:42%;background:#FEBE00"></div></div><span class="bn">5</span></div><div class="barrow"><span class="blab" title="Em Análise">Em Análise</span><div class="btrack"><div class="bfill" style="width:17%;background:#FEBE00"></div></div><span class="bn">2</span></div><div class="barrow"><span class="blab" title="Aguardando Aprovação">Aguardando Aprovação</span><div class="btrack"><div class="bfill" style="width:17%;background:#FEBE00"></div></div><span class="bn">2</span></div></div>
+  </div>
+  <p class="note">Página equivalente à Visão Operacional do PBIX, agora com a base classificada e o recorte de risco. Use a aba ao lado para a camada preditiva.</p>
+</section>
+
+<section id="pred" class="page">
+  <div class="filters">
+    <span class="chip">Modelo: Naive Bayes + regressão logística</span>
+    <span class="chip">Corte de risco: ciclo &gt; 10 dias</span>
+    <span class="chip">Holdout nível 78,4% · F1 risco 0,81</span>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span>Acurácia do nível</span><b>78,4%</b></div>
+    <div class="kpi alt"><span>F1 risco alto</span><b>0,81</b></div>
+    <div class="kpi warn"><span>Abertos risco alto</span><b>23</b></div>
+    <div class="kpi"><span>Abertos perfil N1</span><b>2</b></div>
+    <div class="kpi alt"><span>Abertos perfil N3</span><b>9</b></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Nível sugerido pelo modelo</h3><div class="barrow"><span class="blab" title="N2">N2</span><div class="btrack"><div class="bfill" style="width:100%;background:#00ADEF"></div></div><span class="bn">310</span></div><div class="barrow"><span class="blab" title="N3">N3</span><div class="btrack"><div class="bfill" style="width:84%;background:#00ADEF"></div></div><span class="bn">259</span></div><div class="barrow"><span class="blab" title="N1">N1</span><div class="btrack"><div class="bfill" style="width:12%;background:#00ADEF"></div></div><span class="bn">37</span></div><div class="barrow"><span class="blab" title="Misto">Misto</span><div class="btrack"><div class="bfill" style="width:3%;background:#00ADEF"></div></div><span class="bn">8</span></div></div>
+    <div class="card"><h3>Risco de ciclo longo</h3><div class="barrow"><span class="blab" title="Alto">Alto</span><div class="btrack"><div class="bfill" style="width:100%;background:#CC3366"></div></div><span class="bn">510</span></div><div class="barrow"><span class="blab" title="Baixo">Baixo</span><div class="btrack"><div class="bfill" style="width:20%;background:#CC3366"></div></div><span class="bn">104</span></div></div>
+    <div class="card" style="grid-column:1/-1; min-height:auto">
+      <h3>Fila aberta priorizada</h3>
+      <table>
+        <tr><th>Id</th><th>Título</th><th>Nível</th><th>Risco</th><th>Score</th><th>Ação sugerida</th></tr>
+        <tr>
+              <td>1114397</td>
+              <td>Campo de informações do contato</td>
+              <td><span class="pill">N3</span></td>
+              <td class="alto">Alto</td>
+              <td>0.812</td>
+              <td>Escalar a N3 com dossie</td>
+            </tr><tr>
+              <td>1095483</td>
+              <td>Clientes pendentes de envio por e-mail</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.74</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1162357</td>
+              <td>Preciso criar uma regra para o e-mail biometriafacial@unimedpoa.</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.727</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1155932</td>
+              <td>Encaminhado pela Comissão Técnica de Clientes referente ao bloqu</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.727</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1162258</td>
+              <td>Conversão de e-mail de resposta com falha</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.727</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1161607</td>
+              <td>Habilitar Aba - Busca de Rede Credenciada</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.727</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1169773</td>
+              <td>Desativar fila CRM Contestação Clientes</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.723</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1164790</td>
+              <td>Inclusão de novos registro internos para Adm. de Contratos</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.723</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1164598</td>
+              <td>Criação de Subassunto - Tipo de Ocorrência: Registro Interno</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.723</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1154296</td>
+              <td>Ajustes na árvore do CRM - Relacionamento com o Cooperado</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.723</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1164046</td>
+              <td>Inclusão de assuntos/sub no tipo reclamação</td>
+              <td><span class="pill">N2</span></td>
+              <td class="alto">Alto</td>
+              <td>0.723</td>
+              <td>Priorizar no N2 (risco de ciclo longo)</td>
+            </tr><tr>
+              <td>1169760</td>
+              <td>Beneficiários não integrando com totvs</td>
+              <td><span class="pill">N3</span></td>
+              <td class="alto">Alto</td>
+              <td>0.651</td>
+              <td>Escalar a N3 com dossie</td>
+            </tr>
+      </table>
+    </div>
+  </div>
+  <p class="note">Fonte: Chamados_N2_com_predicao.xlsx · Para publicar no Power BI Desktop: Obter dados → Excel → esta planilha → criar as visuais desta página.</p>
+</section>
+<script>
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  t.classList.add('on');
+  document.getElementById(t.dataset.p).classList.add('on');
+});
+</script>
+</body>
+</html>

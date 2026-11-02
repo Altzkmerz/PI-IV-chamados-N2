@@ -1,0 +1,260 @@
+GUIA CAMPO A CAMPO — Relatório Power BI
+Fonte: Solucao_Final\Chamados_N2_com_predicao.xlsx
+Tema de cores (Unimed L3): #00ADEF  #00995D  #FEBE00  #005C40  #CC3366  #263339
+Tamanho da página: 16:9 (1920 x 1080) · Ajustar à página
+
+
+================================================================
+0) CARREGAR OS DADOS
+================================================================
+1. Power BI Desktop → Obter dados → Excel.
+2. Selecione Chamados_N2_com_predicao.xlsx.
+3. Marque só a aba Chamados_com_score → Transformar dados.
+4. No Power Query, ajuste tipos:
+   - Id Chamado Qualitor          → Texto
+   - Titulo, Categoria, Prioridade, Status, Razao do Status → Texto
+   - Data criacao, Data resolucao → Data
+     (se vier como texto dd/mm/aaaa: coluna → Data → Usar localidade → Português Brasil)
+   - Duracao horas, Ciclo dias, Confianca nivel, Score risco → Número decimal
+   - Aberto, Classificacao manual, Cluster, Familia operacional,
+     Nivel rotulado, Nivel predito (ML), Risco ciclo longo,
+     Acao sugerida, Responsavel → Texto
+5. Fechar e aplicar.
+6. Modelo: uma tabela só. Renomeie para Chamados.
+
+
+================================================================
+1) MEDIDAS DAX (Nova medida, na tabela Chamados)
+================================================================
+Total Chamados =
+COUNTROWS ( Chamados )
+
+Abertos =
+CALCULATE ( COUNTROWS ( Chamados ), Chamados[Aberto] = "Sim" )
+
+Encerrados =
+CALCULATE ( COUNTROWS ( Chamados ), Chamados[Aberto] = "Nao" )
+
+Pct Abertos =
+DIVIDE ( [Abertos], [Total Chamados] )
+
+Risco Alto Abertos =
+CALCULATE (
+    COUNTROWS ( Chamados ),
+    Chamados[Aberto] = "Sim",
+    Chamados[Risco ciclo longo] = "Alto"
+)
+
+Abertos N1 =
+CALCULATE (
+    COUNTROWS ( Chamados ),
+    Chamados[Aberto] = "Sim",
+    Chamados[Nivel predito (ML)] = "N1"
+)
+
+Abertos N3 =
+CALCULATE (
+    COUNTROWS ( Chamados ),
+    Chamados[Aberto] = "Sim",
+    Chamados[Nivel predito (ML)] = "N3"
+)
+
+Criados =
+COUNTROWS ( Chamados )
+
+Encerrados no mes =
+CALCULATE (
+    COUNTROWS ( Chamados ),
+    USERELATIONSHIP ( Chamados[Data resolucao], Calendario[Data] )
+)
+-- Só crie Encerrados no mes se você fizer um calendário (passo 2).
+-- Se não quiser calendário, use o gráfico de colunas agrupadas com
+-- Data criacao no eixo e conte Id; o de encerrados use Data resolucao
+-- em outro visual, ou pule o calendário e use dois gráficos simples.
+
+
+================================================================
+2) CALENDÁRIO (opcional, só se quiser o gráfico mensal único)
+================================================================
+Calendario =
+CALENDAR ( DATE ( 2025, 10, 1 ), DATE ( 2026, 12, 31 ) )
+
+Relacionamentos:
+- Calendario[Data]  *—1  Chamados[Data criacao]     (ativo)
+- Calendario[Data]  *—1  Chamados[Data resolucao]   (inativo)
+
+Se não quiser calendário: ignore as medidas Encerrados no mes e
+o gráfico mensal único. Use um gráfico só com Data criacao.
+
+
+================================================================
+3) PÁGINA 1 — Visão Operacional
+================================================================
+Renomeie a página para: Visão Operacional
+Fundo branco. Título no topo (caixa de texto):
+  "Chamados N2 — Visão Operacional"
+  Fonte Segoe UI Semibold 18, cor #00995D
+
+3.1 Segmentações (linha de cima, à direita)
+  Visual          Campo
+  Segmentação     Status                         (lista / botões)
+  Segmentação     Prioridade                     (lista / botões)
+  Segmentação     Data criacao                   (entre / relativo)
+
+3.2 Cartões (faixa abaixo do título, 5 cartões)
+  Visual     Campo / medida
+  Cartão     Total Chamados
+  Cartão     Abertos
+  Cartão     Pct Abertos          (formato percentual, 1 casa)
+  Cartão     Encerrados
+  Cartão     Risco Alto Abertos   (título: Abertos com risco alto)
+
+  Formato: rótulo da categoria visível; valor grande; borda superior verde #00995D
+
+3.3 Gráfico de colunas agrupadas (faixa larga, centro)
+  Título: Criados × encerrados
+  Eixo X:   Calendario[Data] → hierarquia Mês   (ou Data criacao → Mês)
+  Eixo Y:   Total Chamados          (legenda: Criados)
+            Encerrados no mes       (legenda: Encerrados)
+  Sem calendário, alternativa simples:
+    Eixo X: Data criacao (Mês)
+    Eixo Y: Contagem de Id Chamado Qualitor
+    Título: Chamados criados por mês
+
+3.4 Gráfico de barras (esquerda)
+  Título: Família operacional
+  Eixo Y: Familia operacional
+  Eixo X: Contagem de Id Chamado Qualitor
+  Cores: #00995D
+
+3.5 Gráfico de barras (centro)
+  Título: Cluster do backlog
+  Eixo Y: Cluster
+  Eixo X: Contagem de Id Chamado Qualitor
+  Cores: #00ADEF
+
+3.6 Gráfico de barras (direita)
+  Título: Abertos por razão de status
+  Eixo Y: Razao do Status
+  Eixo X: Contagem de Id Chamado Qualitor
+  Filtro do visual: Aberto = Sim
+  Cores: #FEBE00
+
+
+================================================================
+4) PÁGINA 2 — Predição e classificação
+================================================================
+Nova página. Nome: Predição e classificação
+Título (caixa de texto):
+  "Chamados N2 — Predição e classificação"
+  Segoe UI Semibold 18, cor #005C40
+
+4.1 Segmentações (topo)
+  Visual          Campo
+  Segmentação     Nivel predito (ML)
+  Segmentação     Risco ciclo longo
+  Segmentação     Acao sugerida
+  Segmentação     Aberto                 (deixe padrão = Sim nesta página,
+                                          ou não filtre e deixe o usuário escolher)
+
+4.2 Cartões (5)
+  Visual     Campo / medida              Título do cartão
+  Cartão     Abertos                     Fila aberta
+  Cartão     Risco Alto Abertos          Abertos risco alto
+  Cartão     Abertos N1                  Abertos perfil N1
+  Cartão     Abertos N3                  Abertos perfil N3
+  Cartão     Score risco                 Score médio
+             (agregação Média)           (só faz sentido com filtro Aberto = Sim)
+
+  Dica: no cartão de Score risco, em vez da medida, arraste
+  Score risco e mude a agregação para Média.
+
+4.3 Gráfico de barras (esquerda)
+  Título: Nível sugerido pelo modelo
+  Eixo Y: Nivel predito (ML)
+  Eixo X: Contagem de Id Chamado Qualitor
+  Filtro do visual: Aberto está em todos, ou deixe sem filtro para ver a base toda
+  Cores: #00ADEF
+
+4.4 Gráfico de barras / rosca (direita)
+  Título: Risco de ciclo longo
+  Legenda / eixo: Risco ciclo longo
+  Valores: Contagem de Id Chamado Qualitor
+  Cores: Alto = #CC3366 · Baixo = #00995D
+  (Formato → Cores dos dados → atribuir por categoria)
+
+4.5 Tabela (embaixo, largura total)
+  Título: Fila aberta priorizada
+  Colunas, nesta ordem:
+    1. Id Chamado Qualitor
+    2. Titulo
+    3. Nivel predito (ML)
+    4. Confianca nivel
+    5. Risco ciclo longo
+    6. Score risco
+    7. Acao sugerida
+    8. Razao do Status
+    9. Responsavel
+
+  Filtro do visual: Aberto = Sim
+  Classificar por: Score risco  (decrescente)
+
+  Formatação condicional:
+    - Score risco → barra de dados (0 a 1), cor #CC3366
+    - Risco ciclo longo → regra de texto:
+         Alto  = fonte #CC3366 negrito
+         Baixo = fonte #00995D
+
+
+================================================================
+5) PÁGINA 3 (opcional) — Qualidade da fila
+================================================================
+Nome: Qualidade da fila
+Útil para o vídeo / relatório (N1 indevido e dependência de N3).
+
+5.1 Gráfico de rosca
+  Legenda: Familia operacional
+  Valores: Contagem de Id Chamado Qualitor
+
+5.2 Gráfico de barras
+  Eixo Y: Nivel rotulado
+  Eixo X: Contagem de Id Chamado Qualitor
+  Título: Nível rotulado (classificação L3 / regra)
+
+5.3 Matriz
+  Linhas: Nivel rotulado
+  Colunas: Nivel predito (ML)
+  Valores: Contagem de Id Chamado Qualitor
+  Título: Concordância rótulo × modelo
+  (é a “matriz de confusão” visual)
+
+5.4 Tabela
+  Colunas: Id Chamado Qualitor, Titulo, Nivel rotulado, Nivel predito (ML),
+           Confianca nivel, Familia operacional
+  Filtro: Nivel rotulado <> Nivel predito (ML)
+  Título: Divergências para revisão humana
+
+
+================================================================
+6) FILTROS DO RELATÓRIO (painel Filtros)
+================================================================
+Não coloque filtro global que esconda encerrados na página 1.
+Na página 2, se quiser a fila já aberta:
+  Filtro da página → Aberto = Sim
+
+
+================================================================
+7) ORDEM DAS PÁGINAS
+================================================================
+1. Visão Operacional
+2. Predição e classificação
+3. Qualidade da fila (opcional)
+
+
+================================================================
+8) O QUE MOSTRAR NO VÍDEO
+================================================================
+1. Página 1: cartões + gráfico do mês + família.
+2. Clique num cluster ou numa família e mostre o filtro cruzado.
+3. Página 2: cartões de risco + tabela ordenada por Score risco.
+4. Diga: “cada linha já traz a ação — devolver N1, escalar N3 ou priorizar no N2”.
